@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shift_name: MyString
+  cycle_time: 1.5
+  performance: 1.5
+  start_time: 2024-09-15 01:08:55
+
+two:
+  shift_name: MyString
+  cycle_time: 1.5
+  performance: 1.5
+  start_time: 2024-09-15 01:08:55

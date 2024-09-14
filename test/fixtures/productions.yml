@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  shift: one
+  production_quantity: 1
+  end_time: 2024-09-15 01:10:31
+
+two:
+  shift: two
+  production_quantity: 1
+  end_time: 2024-09-15 01:10:31
