@@ -1,0 +1,18 @@
+<!-- app/views/users/new.html.erb -->
+<h1>ユーザー登録</h1>
+
+<%= form_with model: @user, local: true do |form| %>
+  <p>
+    <%= form.label :username, "ユーザー名" %><br>
+    <%= form.text_field :username %>
+  </p>
+
+  <p>
+    <%= form.label :shift_id, "シフトを選択" %><br>
+    <%= form.collection_select :shift_id, Shift.all, :id, :shift_name %>
+  </p>
+
+  <%= form.submit "登録" %>
+<% end %>
+
+<%= link_to 'トップページへ戻る', root_path %>

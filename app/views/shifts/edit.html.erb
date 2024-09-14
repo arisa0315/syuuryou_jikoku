@@ -1,0 +1,28 @@
+<!-- app/views/shifts/edit.html.erb -->
+<h1>シフトの編集</h1>
+
+<%= form_with model: @shift, local: true do |form| %>
+  <p>
+    <%= form.label :shift_name, "シフト名" %><br>
+    <%= form.text_field :shift_name %>
+  </p>
+
+  <p>
+    <%= form.label :cycle_time, "サイクルタイム" %><br>
+    <%= form.number_field :cycle_time, step: 0.01 %>
+  </p>
+
+  <p>
+    <%= form.label :performance, "出来高" %><br>
+    <%= form.number_field :performance, step: 0.01 %>
+  </p>
+
+  <p>
+    <%= form.label :start_time, "開始時刻" %><br>
+    <%= form.datetime_select :start_time %>
+  </p>
+
+  <%= form.submit "更新" %>
+<% end %>
+
+<%= link_to 'トップページへ戻る', root_path %>

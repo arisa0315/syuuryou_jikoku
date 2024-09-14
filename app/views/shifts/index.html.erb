@@ -1,0 +1,29 @@
+<!-- app/views/shifts/index.html.erb -->
+<h1>生産終了時刻の管理</h1>
+
+<p>以下のシフトが登録されています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>シフト名</th>
+      <th>サイクルタイム</th>
+      <th>出来高</th>
+      <th>開始時刻</th>
+      <th>編集</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @shifts.each do |shift| %>
+      <tr>
+        <td><%= shift.shift_name %></td>
+        <td><%= shift.cycle_time %></td>
+        <td><%= shift.performance %></td>
+        <td><%= shift.start_time %></td>
+        <td><%= link_to '編集', edit_shift_path(shift) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '新しいシフトを登録', new_shift_path %>

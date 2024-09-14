@@ -1,0 +1,18 @@
+<!-- app/views/productions/new.html.erb -->
+<h1>生産数の入力</h1>
+
+<%= form_with model: @production, local: true do |form| %>
+  <p>
+    <%= form.label :shift_id, "シフトを選択" %><br>
+    <%= form.collection_select :shift_id, Shift.all, :id, :shift_name %>
+  </p>
+
+  <p>
+    <%= form.label :production_quantity, "生産数" %><br>
+    <%= form.number_field :production_quantity %>
+  </p>
+
+  <%= form.submit "登録" %>
+<% end %>
+
+<%= link_to 'トップページへ戻る', root_path %>
