@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'shifts#index'
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :shifts, only: [:index, :new, :create, :edit, :update]
+
+  resources :users, only: [:new, :create]
+
+  resources :productions, only: [:new, :create, :edit, :update]
 end
