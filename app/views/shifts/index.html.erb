@@ -1,5 +1,5 @@
 <!-- app/views/shifts/index.html.erb -->
-<h1>生産終了時刻の管理</h1>
+<h1>シフトと生産終了時刻</h1>
 
 <p>以下のシフトが登録されています。</p>
 
@@ -10,7 +10,7 @@
       <th>サイクルタイム</th>
       <th>出来高</th>
       <th>開始時刻</th>
-      <th>編集</th>
+      <th>編集</th> <!-- シフト編集のための列 -->
     </tr>
   </thead>
   <tbody>
@@ -20,10 +20,53 @@
         <td><%= shift.cycle_time %></td>
         <td><%= shift.performance %></td>
         <td><%= shift.start_time %></td>
-        <td><%= link_to '編集', edit_shift_path(shift) %></td>
+        <td><%= link_to '編集', edit_shift_path(shift) %></td> <!-- シフト編集リンク -->
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to '新しいシフトを登録', new_shift_path %>
+<%= link_to '新規シフト登録', new_shift_path %> <!-- シフト新規登録のリンク -->
+
+<hr>
+
+<h2>実績と生産終了時刻</h2>
+
+<p>以下のシフトごとの実績が管理されています。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>シフト名</th>
+      <th>実際の生産数</th> <!-- 実績の表示 -->
+      <th>生産終了時刻</th> <!-- 生産終了時刻の表示 -->
+      <th>実績入力</th> <!-- 実績入力フォーム -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @shifts.each do |shift| %>
+      <tr>
+        <td><%= shift.shift_name %></td>
+        
+        <!-- 実際の生産数を表示 -->
+        <td><%= shift.productions.sum(:production_quantity) %></td>
+
+        <!-- 生産終了時刻の計算 -->
+        <td>
+          <%= shift.start_time + (shift.cycle_time * shift.productions.sum(:production_quantity) * shift.performance) %>
+        </td>
+
+        <!-- 実績入力フォーム -->
+        <td>
+          <%= form_with url: productions_path, method: :post, local: true do |form| %>
+            <%= form.hidden_field :shift_id, value: shift.id %> <!-- シフトIDを隠しフィールドで送信 -->
+            <%= form.number_field :production_quantity, placeholder: "生産数を入力" %>
+            <%= form.submit "登録" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '生産数入力', new_production_path %> <!-- 生産数入力専用のページリンク -->
